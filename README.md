@@ -2,9 +2,9 @@
 
 A simple backend system for an e-commerce application. This project demonstrates the core concepts of building a RESTful API for an online store, including:
 
-- User authentication  
-- Product management  
-- Shopping carts  
+- User authentication
+- Product management
+- Shopping carts
 - Order processing
 
 ---
