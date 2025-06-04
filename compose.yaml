@@ -1,0 +1,88 @@
+services:
+  fastapi:
+    depends_on:
+      - redis
+      - postgres
+    build:
+      context: .
+    restart: always
+    ports:
+      - 8000:8000
+    volumes:
+      - fastapi:/fastapi
+  
+  tests:
+    build:
+      context: .
+      dockerfile: DockerfileTests
+    depends_on:
+      - fastapi
+    volumes:
+      - fastapi:/fastapi/app
+
+  postgres:
+    image: postgres:17.5-alpine3.21
+    restart: always
+    environment:
+      POSTGRES_DB: db_e_commerce
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+    healthcheck:
+      test: ["CMD", "pg_isready -U postgres"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+    ports:
+      - 5431:5432
+    volumes:
+      - postgres:/db
+
+  nginx:
+    depends_on:
+      - fastapi
+    build:
+      context: ./nginx_config
+    ports:
+      - 443:443
+    volumes:
+      - nginx:/nginx_conf
+
+  redis:
+    build:
+      context: ./redis_config
+    expose:
+      - 6379:6379
+    volumes:
+      - redis:/redis_conf
+  prometheus:
+    build:
+      context: ./prometheus_config
+      dockerfile: Dockerfile
+    ports:
+      - 9090:9090
+    depends_on:
+      - node_exporter
+    volumes:
+      - prometheus:/prometheus
+  node_exporter:
+    image: prom/node-exporter
+    ports:
+      - 9100:9100
+    volumes:
+      - node_exporter:/node_exporter
+  grafana:
+    image: grafana/grafana-oss
+    ports:
+      - 3000:3000
+    volumes:
+      - grafana:/var/lib/grafana
+
+
+volumes:
+  fastapi:
+  postgres:
+  nginx:
+  redis:
+  prometheus:
+  node_exporter:
+  grafana:

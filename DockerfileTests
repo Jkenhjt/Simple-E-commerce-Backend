@@ -1,0 +1,12 @@
+FROM python:3.12.7-alpine
+
+WORKDIR /fastapi/app
+
+RUN --mount=type=cache,target=/root/.cache/pip \
+    --mount=type=bind,source=/requirements.txt,target=/requirements.txt \
+    python -m pip install -r /requirements.txt
+
+#Copy aioredis fix for python 3.12
+COPY /fix_aioredis_python3.12/exceptions.py /usr/local/lib/python3.12/site-packages/aioredis/.
+
+CMD ["sh", "-c", "sleep 20 && python -m pytest /fastapi/app/tests"]
