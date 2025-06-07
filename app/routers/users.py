@@ -73,7 +73,7 @@ async def register(user: UserModel, request: Request, dbUsers: sessionUsers):
             f"[{datetime.datetime.now().strftime('%H:%M:%S %d-%m-%Y')}] "
             f"{request.client.host} tries register as {user.username}"
         )
-        utils.LOG.info(
+        utils.LOG.error(
             f"[{datetime.datetime.now().strftime('%H:%M:%S %d-%m-%Y')}] "
             f"{request.client.host} tries register as {user.username}"
         )
@@ -88,7 +88,7 @@ async def register(user: UserModel, request: Request, dbUsers: sessionUsers):
             f"[{datetime.datetime.now().strftime('%H:%M:%S %d-%m-%Y')}] "
             f"{request.client.host} tries register as {user.username}"
         )
-        utils.LOG.info(
+        utils.LOG.error(
             f"[{datetime.datetime.now().strftime('%H:%M:%S %d-%m-%Y')}] "
             f"{request.client.host} tries register as {user.username}"
         )
@@ -103,7 +103,7 @@ async def register(user: UserModel, request: Request, dbUsers: sessionUsers):
             f"[{datetime.datetime.now().strftime('%H:%M:%S %d-%m-%Y')}] "
             f"{request.client.host} tries register as {user.username}"
         )
-        utils.LOG.info(
+        utils.LOG.error(
             f"[{datetime.datetime.now().strftime('%H:%M:%S %d-%m-%Y')}] "
             f"{request.client.host} tries register as {user.username}"
         )
@@ -118,7 +118,7 @@ async def register(user: UserModel, request: Request, dbUsers: sessionUsers):
             f"[{datetime.datetime.now().strftime('%H:%M:%S %d-%m-%Y')}] "
             f"{request.client.host} tries register as {user.username}"
         )
-        utils.LOG.info(
+        utils.LOG.error(
             f"[{datetime.datetime.now().strftime('%H:%M:%S %d-%m-%Y')}] "
             f"{request.client.host} tries register as {user.username}"
         )
